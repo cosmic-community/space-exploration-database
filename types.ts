@@ -60,7 +60,7 @@ interface CelestialBody extends CosmicObject {
   type: 'celestial-bodies';
   metadata: {
     name?: string;
-    type?: {
+    type?: string | {
       key: CelestialBodyType;
       value: string;
     };

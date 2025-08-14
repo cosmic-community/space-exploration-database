@@ -46,6 +46,13 @@ export default async function CelestialBodyPage({ params }: CelestialBodyPagePro
     }
   };
 
+  // Helper function to get display value for type field
+  const getTypeDisplay = (type: string | { key: string; value: string } | undefined): string => {
+    if (!type) return '';
+    if (typeof type === 'string') return type;
+    return type.value || type.key || '';
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <div className="container mx-auto px-4 py-12">
@@ -69,7 +76,7 @@ export default async function CelestialBodyPage({ params }: CelestialBodyPagePro
             {celestialBody.metadata.type && (
               <div className="inline-flex items-center gap-2 mb-6">
                 <span className="px-4 py-2 bg-purple-600/20 border border-purple-400/30 rounded-full text-lg text-purple-300">
-                  {celestialBody.metadata.type.value || celestialBody.metadata.type} 🌌
+                  {getTypeDisplay(celestialBody.metadata.type)} 🌌
                 </span>
               </div>
             )}

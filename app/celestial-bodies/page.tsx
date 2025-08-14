@@ -22,6 +22,13 @@ async function getCelestialBodies(): Promise<CelestialBody[]> {
 export default async function CelestialBodiesPage() {
   const celestialBodies = await getCelestialBodies();
 
+  // Helper function to get display value for type field
+  const getTypeDisplay = (type: string | { key: string; value: string } | undefined): string => {
+    if (!type) return '';
+    if (typeof type === 'string') return type;
+    return type.value || type.key || '';
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <div className="container mx-auto px-4 py-12">
@@ -72,7 +79,7 @@ export default async function CelestialBodiesPage() {
                   {body.metadata.type && (
                     <div className="inline-flex items-center gap-2 mb-3">
                       <span className="px-3 py-1 bg-purple-600/20 border border-purple-400/30 rounded-full text-sm text-purple-300">
-                        {body.metadata.type.value || body.metadata.type}
+                        {getTypeDisplay(body.metadata.type)}
                       </span>
                     </div>
                   )}
